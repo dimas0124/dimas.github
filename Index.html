@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="id">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulator Moder DIMAS</title>
     <style>
@@ -18,7 +19,7 @@
             padding: 20px;
             background-color: #04cdff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: CENTER;
+            text-align: center;
         }
         .calculator h2 {
             margin-bottom: 2px;
@@ -81,25 +82,25 @@
         <div class="display" id="display">0</div>
         <div class="buttons">
             <button class="button clear" onclick="clearDisplay()">C</button>
-            <button class="button operator" onclick="appendOperator(&#39;!&#39;)">!</button>
-            <button class="button operator" onclick="appendOperator(&#39;^&#39;)">^</button>
-            <button class="button operator" onclick="appendOperator(&#39;%&#39;)">%</button>
+            <button class="button operator" onclick="calculateFactorial()">!</button>
+            <button class="button operator" onclick="appendOperator('^')">^</button>
+            <button class="button operator" onclick="appendOperator('%')">%</button>
             <button class="button" onclick="appendNumber(7)">7</button>
             <button class="button" onclick="appendNumber(8)">8</button>
             <button class="button" onclick="appendNumber(9)">9</button>
-            <button class="button operator" onclick="appendOperator(&#39;/&#39;)">/</button>
+            <button class="button operator" onclick="appendOperator('/')">/</button>
             <button class="button" onclick="appendNumber(4)">4</button>
             <button class="button" onclick="appendNumber(5)">5</button>
             <button class="button" onclick="appendNumber(6)">6</button>
-            <button class="button operator" onclick="appendOperator(&#39;*&#39;)">*</button>
+            <button class="button operator" onclick="appendOperator('*')">*</button>
             <button class="button" onclick="appendNumber(1)">1</button>
             <button class="button" onclick="appendNumber(2)">2</button>
             <button class="button" onclick="appendNumber(3)">3</button>
-            <button class="button operator" onclick="appendOperator(&#39;-&#39;)">-</button>
+            <button class="button operator" onclick="appendOperator('-')">-</button>
             <button class="button" onclick="appendNumber(0)">0</button>
             <button class="button operator" onclick="toggleSign()">±</button>
-            <button class="button operator" onclick="appendOperator(&#39;.&#39;)">.</button>
-            <button class="button operator" onclick="appendOperator(&#39;+&#39;)">+</button>
+            <button class="button operator" onclick="appendOperator('.')">.</button>
+            <button class="button operator" onclick="appendOperator('+')">+</button>
             <button class="button equal" onclick="calculateResult()">=</button>
         </div>
     </div>
@@ -132,10 +133,21 @@
             }
         }
 
+        function calculateFactorial() {
+            const display = document.getElementById('display');
+            const num = parseInt(display.textContent);
+            if (isNaN(num) || num < 0) {
+                display.textContent = 'Error';
+            } else {
+                display.textContent = factorial(num);
+            }
+        }
+
         function calculateResult() {
             const display = document.getElementById('display');
+            let expression = display.textContent.replace('^', '**');
             try {
-                display.textContent = eval(display.textContent.replace('^', '**').replace('!', 'factorial'));
+                display.textContent = eval(expression);
             } catch {
                 display.textContent = 'Error';
             }
@@ -145,6 +157,5 @@
             return (n <= 1) ? 1 : n * factorial(n - 1);
         }
     </script>
-
-
-</body></html>
+</body>
+</html>
